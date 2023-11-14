@@ -7,9 +7,10 @@ import random
 from PIL import Image
 from pathlib import Path
 import torch as th
+from carla_gym.envs import EndlessEnv
 
 from carla_gym.envs import LeaderboardEnv
-from carla_gym.core.task_actor.scenario_actor.agents.constant_speed_agent import ConstantSpeedAgent
+from carla_gym.core.task_actor.scenario_actor.agents.basic_agent import BasicAgent
 from carla_gym.utils.expert_noiser import ExpertNoiser
 
 from rl_train import get_obs_configs, get_env_wrapper_configs
@@ -41,24 +42,24 @@ if __name__ == '__main__':
     env_wrapper_configs = get_env_wrapper_configs()
     env = LeaderboardEnv(obs_configs=obs_configs, reward_configs=reward_configs,
                          terminal_configs=terminal_configs, host="localhost", port=2000,
-                         seed=2021, no_rendering=False, **env_configs)
-    expert_file_dir = Path('gail_experts')
+                         seed=2021, no_rendering=False, **env_configs)    
+    expert_file_dir = Path('/mnt/disks/data/gail_experts2')
     expert_file_dir.mkdir(parents=True, exist_ok=True)
     obs_metrics = ['control', 'vel_xy', 'linear_speed', 'vec', 'traj', 'cmd', 'command', 'state']
     for route_id in tqdm.tqdm(range(10)):
         env.set_task_idx(route_id)
         for ep_id in range(1):
             episode_dir = expert_file_dir / ('route_%02d' % route_id) / ('ep_%02d' % ep_id)
-            (episode_dir / 'birdview_masks').mkdir(parents=True)
-            (episode_dir / 'central_rgb').mkdir(parents=True)
-            (episode_dir / 'left_rgb').mkdir(parents=True)
-            (episode_dir / 'right_rgb').mkdir(parents=True)
+            (episode_dir / 'birdview_masks').mkdir(parents=True, exist_ok=True)
+            (episode_dir / 'central_rgb').mkdir(parents=True, exist_ok=True)
+            (episode_dir / 'left_rgb').mkdir(parents=True, exist_ok=True)
+            (episode_dir / 'right_rgb').mkdir(parents=True, exist_ok=True)
 
             longitudinal_noiser = ExpertNoiser('Throttle', frequency=15, intensity=10, min_noise_time_amount=2.0)
             lateral_noiser = ExpertNoiser('Spike', frequency=25, intensity=4, min_noise_time_amount=0.5)
             print("wasfcf")
             obs = env.reset()
-            basic_agent = ConstantSpeedAgent(env._ev_handler.ego_vehicles['hero'], None, 6.0)
+            basic_agent = BasicAgent(env._ev_handler.ego_vehicles['hero'], None, 10.0)
             ep_dict = {}
             for state_key in obs_metrics:
                 ep_dict[state_key] = []
@@ -84,6 +85,7 @@ if __name__ == '__main__':
                 np.save(array_path, birdview)
                 for i_mask in range(1):
                     birdview_mask = birdview[i_mask * 3: i_mask * 3 + 3]
+                    print(birdview_mask.shape)
                     birdview_mask = np.transpose(birdview_mask, [1, 2, 0]).astype(np.uint8)
                     Image.fromarray(birdview_mask).save(episode_dir / 'birdview_masks' / '{:0>4d}_{:0>2d}.png'.format(i_step, i_mask))
 

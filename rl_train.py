@@ -15,7 +15,7 @@ from rl_birdview.models.discriminator import Discriminator
 from rl_birdview.utils.wandb_callback import WandbCallback
 
 FAKE_BIRDVIEW = False
-RESUME_LAST_TRAIN = False
+RESUME_LAST_TRAIN = True
 GAIL = True
 RGB_GAIL = False
 
@@ -35,8 +35,8 @@ terminal_configs = {
 
 env_configs = {
     'carla_map': 'Town01',
-    'num_zombie_vehicles': [0, 150],
-    'num_zombie_walkers': [0, 300],
+    'num_zombie_vehicles': [10, 150],
+    'num_zombie_walkers': [10, 300],
     'weather_group': 'dynamic_1.0'
 }
 

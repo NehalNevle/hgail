@@ -20,7 +20,7 @@ if __name__ == '__main__':
 
     expert_loader = th.utils.data.DataLoader(
         ExpertDataset(
-            'gail_experts',
+            '/mnt/disks/data/gail_experts',
             n_routes=1,
             n_eps=1,
         ),

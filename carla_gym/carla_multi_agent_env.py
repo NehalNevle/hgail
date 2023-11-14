@@ -32,8 +32,8 @@ class CarlaMultiAgentEnv(gym.Env):
         # define observation spaces exposed to agent
         self._om_handler = ObsManagerHandler(obs_configs)
         self._ev_handler = EgoVehicleHandler(self._client, reward_configs, terminal_configs)
-        # self._zw_handler = ZombieWalkerHandler(self._client)
-        # self._zv_handler = ZombieVehicleHandler(self._client, tm_port=self._tm.get_port())
+        self._zw_handler = ZombieWalkerHandler(self._client)
+        self._zv_handler = ZombieVehicleHandler(self._client, tm_port=self._tm.get_port())
         self._sa_handler = ScenarioActorHandler(self._client)
         # self._wt_handler = WeatherHandler(self._world)
 
@@ -79,10 +79,10 @@ class CarlaMultiAgentEnv(gym.Env):
         self._sa_handler.reset(self._task['scenario_actors'], self._ev_handler.ego_vehicles)
         logger.debug("_sa_handler reset done!!")
 
-        # self._zw_handler.reset(self._task['num_zombie_walkers'], ev_spawn_locations)
+        self._zw_handler.reset(self._task['num_zombie_walkers'], ev_spawn_locations)
         # logger.debug("_zw_handler reset done!!")
 
-        # self._zv_handler.reset(self._task['num_zombie_vehicles'], ev_spawn_locations)
+        self._zv_handler.reset(self._task['num_zombie_vehicles'], ev_spawn_locations)
         # logger.debug("_zv_handler reset done!!")
 
         self._om_handler.reset(self._ev_handler.ego_vehicles)
@@ -132,9 +132,9 @@ class CarlaMultiAgentEnv(gym.Env):
         # update weather
         # self._wt_handler.tick(snap_shot.timestamp.delta_seconds)
 
-        # num_walkers = len(self._world.get_actors().filter("*walker.pedestrian*"))
-        # num_vehicles = len(self._world.get_actors().filter("vehicle*"))
-        # logger.debug(f"num_walkers: {num_walkers}, num_vehicles: {num_vehicles}, ")
+        num_walkers = len(self._world.get_actors().filter("*walker.pedestrian*"))
+        num_vehicles = len(self._world.get_actors().filter("vehicle*"))
+        logger.debug(f"num_walkers: {num_walkers}, num_vehicles: {num_vehicles}, ")
 
         return obs_dict, reward_dict, done_dict, info_dict
 
@@ -200,8 +200,8 @@ class CarlaMultiAgentEnv(gym.Env):
 
     def clean(self):
         self._sa_handler.clean()
-        # self._zw_handler.clean()
-        # self._zv_handler.clean()
+        self._zw_handler.clean()
+        self._zv_handler.clean()
         self._om_handler.clean()
         self._ev_handler.clean()
         # self._wt_handler.clean()

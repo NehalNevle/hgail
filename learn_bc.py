@@ -233,7 +233,7 @@ if __name__ == '__main__':
 
     gail_train_loader = th.utils.data.DataLoader(
         ExpertDataset(
-            'gail_experts',
+            '/mnt/disks/data/gail_experts',
             n_routes=8,
             n_eps=1,
         ),
@@ -243,7 +243,7 @@ if __name__ == '__main__':
     
     gail_val_loader = th.utils.data.DataLoader(
         ExpertDataset(
-            'gail_experts',
+            '/mnt/disks/data/gail_experts',
             n_routes=2,
             n_eps=1,
             route_start=8

@@ -117,7 +117,7 @@ class RlBirdviewWrapper(gym.Wrapper):
     def reset(self):
         self.reset_monitor()
         self.env.set_task_idx(np.random.choice(self.env.num_tasks))
-        if self.eval_mode:
+        if True:
             self.env.eval_mode = True
             self.env._task['num_zombie_vehicles'] = eval_num_zombie_vehicles[self.env._carla_map]
             self.env._task['num_zombie_walkers'] = eval_num_zombie_walkers[self.env._carla_map]

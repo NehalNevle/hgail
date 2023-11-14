@@ -11,7 +11,7 @@ import pandas as pd
 if __name__ == '__main__':
     expert_loader = torch.utils.data.DataLoader(
         ExpertDataset(
-            'gail_experts',
+            '/mnt/disks/data/gail_experts',
             n_routes=10,
             n_eps=1,
         ),
@@ -25,7 +25,7 @@ if __name__ == '__main__':
     route_id = 0
     ep_id = 0
     i_step = 0
-    expert_file_dir = Path('gail_experts')
+    expert_file_dir = Path('/mnt/disks/data/gail_experts')
     traj_length = 0
     for img_idx in range(fake_birdview_tensor.shape[0]):
         if i_step >= traj_length:

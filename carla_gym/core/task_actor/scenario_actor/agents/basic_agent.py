@@ -7,6 +7,7 @@
 # For a copy, see <https://creativecommons.org/licenses/by-nc/4.0/deed>.
 
 import numpy as np
+import carla
 from .utils.local_planner import LocalPlanner
 from .utils.misc import is_within_distance_ahead, compute_yaw_difference
 

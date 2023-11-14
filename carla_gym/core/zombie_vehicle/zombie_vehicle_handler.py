@@ -6,7 +6,7 @@ from .zombie_vehicle import ZombieVehicle
 
 class ZombieVehicleHandler(object):
 
-    def __init__(self, client, tm_port=8000, spawn_distance_to_ev=10.0):
+    def __init__(self, client, tm_port=8000, spawn_distance_to_ev=7.0):
         self._logger = logging.getLogger(__name__)
         self.zombie_vehicles = {}
         self._client = client
@@ -53,7 +53,6 @@ class ZombieVehicleHandler(object):
             blueprint.set_attribute('role_name', 'zombie_vehicle')
 
             batch.append(SpawnActor(blueprint, transform).then(SetAutopilot(FutureActor, True, self._tm_port)))
-
         for response in self._client.apply_batch_sync(batch, do_tick=True):
             if not response.error:
                 zombie_vehicle_ids.append(response.actor_id)

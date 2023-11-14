@@ -162,8 +162,8 @@ class ObsManager(ObsManagerBase):
         image = np.zeros([self._width, self._width, 3], dtype=np.uint8)
         image[road_mask] = COLOR_ALUMINIUM_5
         image[route_mask] = COLOR_ALUMINIUM_3
-        image[lane_mask_all] = COLOR_MAGENTA
-        image[lane_mask_broken] = COLOR_MAGENTA_2
+        image[lane_mask_all] = COLOR_CYAN
+        image[lane_mask_broken] = COLOR_CYAN
 
         h_len = len(self._history_idx)-1
         for i, mask in enumerate(stop_masks):
@@ -174,7 +174,6 @@ class ObsManager(ObsManagerBase):
             image[mask] = tint(COLOR_YELLOW, (h_len-i)*0.2)
         for i, mask in enumerate(tl_red_masks):
             image[mask] = tint(COLOR_RED, (h_len-i)*0.2)
-
         for i, mask in enumerate(vehicle_masks):
             image[mask] = tint(COLOR_BLUE, (h_len-i)*0.2)
         for i, mask in enumerate(walker_masks):
@@ -184,9 +183,9 @@ class ObsManager(ObsManagerBase):
         # image[obstacle_mask] = COLOR_BLUE
 
         # masks
-        c_road = road_mask * 255
+        c_road = road_mask * 125
         c_route = route_mask * 255
-        c_lane = lane_mask_all * 255
+        c_lane = lane_mask_all * 125
         c_lane[lane_mask_broken] = 120
 
         # masks with history
@@ -199,11 +198,13 @@ class ObsManager(ObsManagerBase):
             c_tl[stop_masks[i]] = 255
             c_tl_history.append(c_tl)
 
-        c_vehicle_history = [m*255 for m in vehicle_masks]
-        c_walker_history = [m*255 for m in walker_masks]
-
+        # c_vehicle_history = [m*255 for m in vehicle_masks]
+        # c_walker_history = [m*255 for m in walker_masks]
+        c_lane = 0 * c_lane + 255 * vehicle_masks[-1] + c_lane + 255 * walker_masks[-1]
         masks = np.stack((c_road, c_route, c_lane), axis=2)
+        print(masks.shape)
         masks = np.transpose(masks, [2, 0, 1])
+        print(masks.shape)
 
         obs_dict = {'rendered': image, 'masks': masks}
 
@@ -252,7 +253,6 @@ class ObsManager(ObsManagerBase):
             corners = [actor_transform.transform(corner) for corner in corners]
             corners_in_pixel = np.array([[self._world_to_pixel(corner)] for corner in corners])
             corners_warped = cv.transform(corners_in_pixel, M_warp)
-
             cv.fillConvexPoly(mask, np.round(corners_warped).astype(np.int32), 1)
         return mask.astype(np.bool)
 

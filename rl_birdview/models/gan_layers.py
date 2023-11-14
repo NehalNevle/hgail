@@ -201,7 +201,7 @@ class GanFakeBirdview(nn.Module):
 
         self.val_dataloader = torch.utils.data.DataLoader(
             ExpertDataset(
-                'gail_experts',
+                '/mnt/disks/data/gail_experts',
                 n_routes=1,
                 n_eps=1,
             ),
@@ -332,7 +332,7 @@ class GanFakeBirdview(nn.Module):
     def pretrain(self):
         dataloader = torch.utils.data.DataLoader(
             ExpertDataset(
-                'gail_experts',
+                '/mnt/disks/data/gail_experts',
                 n_routes=10,
                 n_eps=1,
             ),
