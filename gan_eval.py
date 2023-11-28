@@ -20,11 +20,12 @@ if __name__ == '__main__':
 
     expert_loader = th.utils.data.DataLoader(
         ExpertDataset(
-            '/mnt/disks/data/gail_experts',
+            '/mnt/disks/data/gail_experts2',
             n_routes=1,
             n_eps=1,
         ),
         batch_size=4,
+        num_workers=32,
         shuffle=True,
     )
     for ckpt_idx, ckpt_path in enumerate(ckpt_list):

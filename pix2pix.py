@@ -11,11 +11,12 @@ import pandas as pd
 if __name__ == '__main__':
     expert_loader = torch.utils.data.DataLoader(
         ExpertDataset(
-            '/mnt/disks/data/gail_experts',
+            '/mnt/disks/data/gail_experts2',
             n_routes=10,
             n_eps=1,
         ),
         batch_size=256,
+        num_workers=32,
         shuffle=True,
     )
     gan_fake_birdview = GanFakeBirdview()
@@ -25,7 +26,7 @@ if __name__ == '__main__':
     route_id = 0
     ep_id = 0
     i_step = 0
-    expert_file_dir = Path('/mnt/disks/data/gail_experts')
+    expert_file_dir = Path('/mnt/disks/data/gail_experts2')
     traj_length = 0
     for img_idx in range(fake_birdview_tensor.shape[0]):
         if i_step >= traj_length:

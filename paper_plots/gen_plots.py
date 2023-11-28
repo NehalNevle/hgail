@@ -92,7 +92,7 @@ generate_vector_field(vector_field, title, ax_count)
 # img_name = 'late_eval'
 # generate_vector_field(vector_field, img_name, img_path)
 
-# expert_vector_field = pd.read_csv('/mnt/disks/data/gail_experts/route_00/expert.csv')
+# expert_vector_field = pd.read_csv('/mnt/disks/data/gail_experts2/route_00/expert.csv')
 # vector_field = expert_vector_field[expert_vector_field['ep_count'] == 1]
 # img_name = 'expert'
 # generate_vector_field(vector_field, img_name, img_path)

@@ -24,19 +24,19 @@ class LeaderboardEnv(CarlaMultiAgentEnv):
     def build_all_tasks(carla_map, weather_group, routes_group, routes_file):
         assert carla_map in ['Town01', 'Town02', 'Town03', 'Town04', 'Town05', 'Town06']
         num_zombie_vehicles = {
-            'Town01': 120,
-            'Town02': 70,
-            'Town03': 70,
-            'Town04': 150,
-            'Town05': 120,
-            'Town06': 120
+            'Town01': 80,
+            'Town02': 80,
+            'Town03': 80,
+            'Town04': 80,
+            'Town05': 80,
+            'Town06': 80
         }
         num_zombie_walkers = {
-            'Town01': 120,
-            'Town02': 70,
-            'Town03': 70,
+            'Town01': 80,
+            'Town02': 80,
+            'Town03': 80,
             'Town04': 80,
-            'Town05': 120,
+            'Town05': 80,
             'Town06': 80
         }
 

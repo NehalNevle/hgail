@@ -162,7 +162,7 @@ if __name__ == '__main__':
         'gail': GAIL,
         'n_steps_total': 12288,
         'batch_size': 256,
-        'n_epochs': 20,
+        'n_epochs': 40,
         'gamma': 0.99,
         'gae_lambda': 0.9,
         'clip_range': 0.2,

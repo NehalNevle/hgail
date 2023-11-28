@@ -41,12 +41,12 @@ class EgoVehicleHandler(object):
             bp_filter = actor_config[ev_id]['model']
             blueprint_library = self._world.get_blueprint_library()
             vehicle_blueprints = blueprint_library.filter(bp_filter)
-            print(vehicle_blueprints)
+            # print(vehicle_blueprints)
             try:
                 blueprint = random.choice(vehicle_blueprints)
             except:
                 blueprint = vehicle_blueprints
-            print("debug ",bp_filter)
+            # print("debug ",bp_filter)
 
             blueprint.set_attribute('role_name', ev_id)
 

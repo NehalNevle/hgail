@@ -134,7 +134,7 @@ class CarlaMultiAgentEnv(gym.Env):
 
         num_walkers = len(self._world.get_actors().filter("*walker.pedestrian*"))
         num_vehicles = len(self._world.get_actors().filter("vehicle*"))
-        logger.debug(f"num_walkers: {num_walkers}, num_vehicles: {num_vehicles}, ")
+        # logger.debug(f"num_walkers: {num_walkers}, num_vehicles: {num_vehicles}, ")
 
         return obs_dict, reward_dict, done_dict, info_dict
 

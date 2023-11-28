@@ -85,7 +85,7 @@ if __name__ == '__main__':
                 np.save(array_path, birdview)
                 for i_mask in range(1):
                     birdview_mask = birdview[i_mask * 3: i_mask * 3 + 3]
-                    print(birdview_mask.shape)
+                    # print(birdview_mask.shape)
                     birdview_mask = np.transpose(birdview_mask, [1, 2, 0]).astype(np.uint8)
                     Image.fromarray(birdview_mask).save(episode_dir / 'birdview_masks' / '{:0>4d}_{:0>2d}.png'.format(i_step, i_mask))
 

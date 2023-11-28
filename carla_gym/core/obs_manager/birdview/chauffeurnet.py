@@ -200,11 +200,11 @@ class ObsManager(ObsManagerBase):
 
         # c_vehicle_history = [m*255 for m in vehicle_masks]
         # c_walker_history = [m*255 for m in walker_masks]
-        c_lane = 0 * c_lane + 255 * vehicle_masks[-1] + c_lane + 255 * walker_masks[-1]
+        c_lane = 0 * c_lane + 255 * vehicle_masks[-1] + 255 * walker_masks[-1]
         masks = np.stack((c_road, c_route, c_lane), axis=2)
-        print(masks.shape)
+        # print(masks.shape)
         masks = np.transpose(masks, [2, 0, 1])
-        print(masks.shape)
+        # print(masks.shape)
 
         obs_dict = {'rendered': image, 'masks': masks}
 

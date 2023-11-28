@@ -61,11 +61,12 @@ class Discriminator(nn.Module):
         self._build()
         self.expert_loader = th.utils.data.DataLoader(
                 ExpertDataset(
-                    '/mnt/disks/data/gail_experts',
+                    '/mnt/disks/data/gail_experts2',
                     n_routes=8,
                     n_eps=1,
                 ),
                 batch_size=self.batch_size,
+                num_workers=32,
                 shuffle=True,
             )
         self.max_grad_norm = 0.5
