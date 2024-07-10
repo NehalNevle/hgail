@@ -97,8 +97,17 @@ class PPO():
             self.action_statistics.append(actions)
             self.mu_statistics.append(mu)
             self.sigma_statistics.append(sigma)
-
+            flag = False
+            count = 0
+            # while(not flag):
+            #     try:
             new_obs, rewards, dones, infos = env.step(actions)
+            # print(count)
+            flag = True
+            print('Timestep [%d%%]\r'%count, end="")
+            count+=1
+                # except:
+                #     pass
 
             if callback.on_step() is False:
                 return False
@@ -157,10 +166,13 @@ class PPO():
 
         # train for gradient_steps epochs
         epoch = 0
+        count = 0
         data_len = int(self.buffer.buffer_size * self.buffer.n_envs / self.batch_size)
         if self.policy.fake_birdview:
             data_loader_fake_birdview = self.policy.gan_fake_birdview.fill_expert_dataset(self.discriminator.expert_loader)
         for epoch in range(self.n_epochs):
+            count+=1
+            print('Epoch [%d%%]\r'%count, end="")
             approx_kl_divs = []
             # Do a complete pass on the rollout buffer
             self.buffer.start_caching(self.batch_size)

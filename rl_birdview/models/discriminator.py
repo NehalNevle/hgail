@@ -61,12 +61,11 @@ class Discriminator(nn.Module):
         self._build()
         self.expert_loader = th.utils.data.DataLoader(
                 ExpertDataset(
-                    '/mnt/disks/data/gail_experts2',
+                    '/mnt/disks/data/gail_experts3',
                     n_routes=8,
                     n_eps=1,
                 ),
                 batch_size=self.batch_size,
-                num_workers=32,
                 shuffle=True,
             )
         self.max_grad_norm = 0.5
@@ -114,6 +113,7 @@ class Discriminator(nn.Module):
             birdview = birdview.float() / 255.0
             state = obs_dict['state'].to(self.device)
             action = action.to(self.device)
+            # print(action.shape,"....",state.shape)
             features = self.features_extractor(birdview, state, action)
 
         disc = self.disc_head(features)

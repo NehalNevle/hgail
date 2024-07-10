@@ -43,7 +43,7 @@ if __name__ == '__main__':
     env = LeaderboardEnv(obs_configs=obs_configs, reward_configs=reward_configs,
                          terminal_configs=terminal_configs, host="localhost", port=2000,
                          seed=2021, no_rendering=False, **env_configs)    
-    expert_file_dir = Path('/mnt/disks/data/gail_experts2')
+    expert_file_dir = Path('/mnt/disks/data/gail_experts3')
     expert_file_dir.mkdir(parents=True, exist_ok=True)
     obs_metrics = ['control', 'vel_xy', 'linear_speed', 'vec', 'traj', 'cmd', 'command', 'state']
     for route_id in tqdm.tqdm(range(10)):

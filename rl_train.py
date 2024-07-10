@@ -35,8 +35,8 @@ terminal_configs = {
 
 env_configs = {
     'carla_map': 'Town01',
-    'num_zombie_vehicles': [10, 150],
-    'num_zombie_walkers': [10, 300],
+    'num_zombie_vehicles': [10, 80],
+    'num_zombie_walkers': [10, 80],
     'weather_group': 'dynamic_1.0'
 }
 
@@ -160,8 +160,8 @@ if __name__ == '__main__':
     train_kwargs = {
         'initial_learning_rate': 1e-5,
         'gail': GAIL,
-        'n_steps_total': 12288,
-        'batch_size': 256,
+        'n_steps_total': 5000,
+        'batch_size': 246,
         'n_epochs': 40,
         'gamma': 0.99,
         'gae_lambda': 0.9,

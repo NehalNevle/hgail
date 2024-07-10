@@ -37,7 +37,10 @@ class DiagGaussianDistribution():
             'turn': th.FloatTensor([0.0, -1]),
             'straight': th.FloatTensor([3.0, 3.0])
         }
-
+        self.brake_exploration_dist = {
+            'go': th.FloatTensor([0.0, 0.5]),
+            'stop': th.FloatTensor([0.5, 0.1])
+        }
         if th.cuda.is_available():
             self.device = 'cuda'
         else:
@@ -187,14 +190,14 @@ class BetaDistribution():
         self.acc_exploration_dist = {
             # [1, 2.5]
             # [1.5, 1.0]
-            'go': th.FloatTensor([1.0, 2.5]),
+            'go': th.FloatTensor([1,7.5]),
             'stop': th.FloatTensor([1.5, 1.0])
         }
         self.steer_exploration_dist = {
             'turn': th.FloatTensor([1.0, 1.0]),
             'straight': th.FloatTensor([3.0, 3.0])
         }
-
+        
         if th.cuda.is_available():
             self.device = 'cuda'
         else:
@@ -244,7 +247,7 @@ class BetaDistribution():
             if steer_suggest != '':
                 beta[i, 1] = self.steer_exploration_dist[steer_suggest][0]
                 alpha[i, 1] = self.steer_exploration_dist[steer_suggest][1]
-
+           
         dist_ent = Beta(alpha, beta)
 
         exploration_loss = th.distributions.kl_divergence(self.distribution, dist_ent)

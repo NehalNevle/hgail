@@ -4,7 +4,7 @@ from PIL import Image
 
 
 if __name__ == '__main__':
-    image_path = '/mnt/disks/data/gail_experts2/route_00/ep_00/birdview_masks/0050_00.png'
+    image_path = '/mnt/disks/data/gail_experts3/route_00/ep_00/birdview_masks/0050_00.png'
     bev_masks_output_dir = Path('paper_plots/bev_masks')
     bev_masks_output_dir.mkdir(parents=True, exist_ok=True)
     image_array = Image.open(image_path)

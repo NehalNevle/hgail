@@ -119,6 +119,7 @@ class DiscXtMaCNN(nn.Module):
     def forward(self, birdview, state, action):
         x = self.cnn(birdview)
         liner_input = th.cat((state, action), dim=1)
+        print(state.shape, action.shape)
         latent_linear = self.state_linear(liner_input)
 
         x = th.cat((x, latent_linear), dim=1)

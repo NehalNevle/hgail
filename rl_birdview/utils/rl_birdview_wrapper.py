@@ -29,7 +29,7 @@ eval_num_zombie_walkers = {
 }
 
 class RlBirdviewWrapper(gym.Wrapper):
-    def __init__(self, env, input_states=[], acc_as_action=False, env_id=0, resume=False):
+    def __init__(self, env, input_states=[], acc_as_action=True, env_id=0, resume=False):
         assert len(env._obs_configs) == 1
         self._ev_id = list(env._obs_configs.keys())[0]
         self._input_states = input_states

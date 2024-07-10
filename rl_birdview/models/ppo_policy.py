@@ -208,6 +208,9 @@ class PpoPolicy(nn.Module):
             log_prob = distribution.log_prob(actions)
 
         actions = actions.cpu().numpy()
+        print(actions)
+        actions[0][0] = 2*actions[0][0]-1
+        print(actions)
         actions = self.unscale_action(actions)
         if clip_action:
             actions = np.clip(actions, self.action_space.low, self.action_space.high)

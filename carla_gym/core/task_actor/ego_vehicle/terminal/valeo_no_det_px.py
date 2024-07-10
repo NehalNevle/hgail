@@ -77,19 +77,19 @@ class ValeoNoDetPx(object):
         # terminal guide
         exploration_suggest = {
             'n_steps': 0,
-            'suggest': ('', '','')
+            'suggest': ('', '')
         }
         if self._exploration_suggest:
             if c_blocked:
                 exploration_suggest['n_steps'] = 100
-                exploration_suggest['suggest'] = ('go', '','go')
+                exploration_suggest['suggest'] = ('go', '')
             if c_lat_dist:
                 exploration_suggest['n_steps'] = 100
-                exploration_suggest['suggest'] = ('go', 'turn','go')
+                exploration_suggest['suggest'] = ('go', 'turn')
             # if c_run_rl or c_collision or c_run_stop or c_collision_px:
             if c_collision or c_collision_px:
                 exploration_suggest['n_steps'] = 100
-                exploration_suggest['suggest'] = ('stop', '','stop')
+                exploration_suggest['suggest'] = ('stop', '')
 
         # debug info
 
